@@ -1,11 +1,10 @@
 from pydantic_settings import BaseSettings
-from typing import List, Any
-from pydantic import field_validator
+from typing import List
 
 
 class Settings(BaseSettings):
     # MongoDB
-    MONGODB_URI: str 
+    MONGODB_URI: str
     MONGODB_DB_NAME: str = "school_erp"
 
     # Auth
@@ -22,31 +21,19 @@ class Settings(BaseSettings):
     MAX_UPLOAD_SIZE_MB: int = 10
 
     # CORS
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "https://schoolworkautomation-1.onrender.com",
-    ]
+    CORS_ORIGINS: str = (
+        "http://localhost:3000,"
+        "http://localhost:5173,"
+        "https://schoolworkautomation-1.onrender.com"
+    )
 
-    @field_validator("CORS_ORIGINS", mode="before")
-    @classmethod
-    def assemble_cors_origins(cls, v: Any) -> List[str]:
-        if isinstance(v, str):
-            if v.startswith("["):
-                import json
-                try:
-                    return json.loads(v)
-                except Exception:
-                    raise ValueError(
-                        f"Could not parse JSON list for CORS_ORIGINS: {v}"
-                    )
-
-            return [i.strip() for i in v.split(",") if i.strip()]
-
-        if isinstance(v, list):
-            return v
-
-        return v
+    @property
+    def cors_origins_list(self) -> List[str]:
+        return [
+            origin.strip()
+            for origin in self.CORS_ORIGINS.split(",")
+            if origin.strip()
+        ]
 
     model_config = {
         "env_file": ".env",
