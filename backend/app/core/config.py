@@ -5,7 +5,7 @@ from pydantic import field_validator
 
 class Settings(BaseSettings):
     # MongoDB
-    MONGODB_URI: str = "mongodb://localhost:27017"
+    MONGODB_URI: str = "mongodb+srv://rathishkrishnamoorthi_db_user:TeuDn3Y3k3tJnn46@cluster0.cu2xgi0.mongodb.net/?appName=Cluster0&tls=true&tlsAllowInvalidCertificates=true"
     MONGODB_DB_NAME: str = "school_erp"
 
     # Auth
@@ -22,7 +22,11 @@ class Settings(BaseSettings):
     MAX_UPLOAD_SIZE_MB: int = 10
 
     # CORS
-    CORS_ORIGINS: Any = ["http://localhost:3000", "http://localhost:5173"]
+    CORS_ORIGINS: Any = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://schoolworkautomation-1.onrender.com"
+]
 
     @field_validator("CORS_ORIGINS", mode="before")
     @classmethod

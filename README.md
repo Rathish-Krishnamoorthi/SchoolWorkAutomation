@@ -60,7 +60,7 @@ python -m app.db.seed
 uvicorn app.main:app --reload --port 8000
 ```
 
-API docs: http://localhost:8000/api/docs
+API docs: https://schoolworkautomation.onrender.com/api/docs
 
 > The frontend currently uses a Zustand mock service layer and does **not** require the backend to be running. The backend is ready to connect once you switch the service layer from mock to real API calls.
 

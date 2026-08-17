@@ -12,7 +12,7 @@ import {
   DEMO_STUDENTS
 } from '@/data/demoData';
 
-const API_BASE = 'http://localhost:8000/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'https://schoolworkautomation-1.onrender.com/api/v1';
 
 const mapStudentFromApi = (student: any): Student => ({
   id: student.id ?? student._id ?? student.student_id ?? '',
@@ -272,7 +272,7 @@ export const useAppStore = create<AppState>()(
       isAuthenticated: false,
       login: async (email, password) => {
         try {
-          const res = await fetch('http://localhost:8000/api/v1/auth/login', {
+          const res = await fetch(`${API_BASE}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password }),
@@ -311,7 +311,7 @@ export const useAppStore = create<AppState>()(
       },
       register: async (name, email, password, role) => {
         try {
-          const res = await fetch('http://localhost:8000/api/v1/auth/register', {
+          const res = await fetch(`${API_BASE}/auth/register`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ name, email, password, role }),

@@ -3,7 +3,7 @@ import { BrainCircuit, AlertTriangle, Sparkles } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useAppStore } from '@/store/useAppStore';
 
-const API_BASE = 'http://localhost:8000/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'https://schoolworkautomation-1.onrender.com/api/v1';
 
 function getAuthHeaders(extra?: Record<string, string>) {
   const token = localStorage.getItem('auth_token') || 'mock-demo-token-for-school-erp';
