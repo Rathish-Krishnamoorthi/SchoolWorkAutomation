@@ -12,7 +12,7 @@ import {
   DEMO_STUDENTS
 } from '@/data/demoData';
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? 'https://schoolworkautomation-1.onrender.com/api/v1';
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'https://schoolworkautomation.onrender.com/api/v1';
 
 const mapStudentFromApi = (student: any): Student => ({
   id: student.id ?? student._id ?? student.student_id ?? '',
