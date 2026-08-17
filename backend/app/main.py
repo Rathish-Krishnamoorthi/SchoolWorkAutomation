@@ -32,17 +32,11 @@ app = FastAPI(
     redoc_url="/api/redoc",
     lifespan=lifespan,
 )
-@app.get("/debug")
-async def debug():
-    return {
-        "message": "THIS IS THE NEW DEPLOYED VERSION",
-        "docs_url": app.docs_url,
-        "openapi_url": app.openapi_url
-    }
+
 # ── CORS ───────────────────────────────────────────────────────────────────────
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=settings.cors_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
