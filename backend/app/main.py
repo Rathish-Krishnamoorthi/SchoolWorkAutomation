@@ -55,3 +55,13 @@ app.include_router(api_v1_router, prefix="/api/v1")
 @app.get("/", tags=["Health"])
 async def health_check():
     return {"status": "ok", "service": "EduCore ERP API", "version": "1.0.0"}
+
+
+@app.get("/debug", tags=["Debug"])
+async def debug_routes():
+    return {
+        "docs_url": app.docs_url,
+        "openapi_url": app.openapi_url,
+        "redoc_url": app.redoc_url,
+        "routes": [route.path for route in app.routes],
+    }
